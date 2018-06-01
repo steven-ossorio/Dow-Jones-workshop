@@ -16,6 +16,7 @@ class App extends Component {
     super(props);
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
+    this.timer = this.timer.bind(this);
 
     //default state
     //this keeps track of "live" data on the browser
@@ -23,7 +24,8 @@ class App extends Component {
       articles: null,
       error: null,
       loaded: false,
-      showSummaries: false
+      showSummaries: false,
+      timer: 10,
     };
   }
 
@@ -48,6 +50,19 @@ class App extends Component {
         loaded: true
       });
     });
+
+    this.interval = setInterval( () => {
+        this.timer();
+    }, 1000);
+  }
+
+  timer() {
+    if (this.state.timer === 1) {
+      clearInterval(this.interval);
+    }
+    this.setState( (prevState, props) => ({
+      timer: prevState.timer - 1
+    }));
   }
 
   //click handler for button
@@ -77,34 +92,24 @@ class App extends Component {
     } else {
       //render articles
       let articleJSX = [];
-      // <Article
-      //   key={idx}
-      //   headline={article.headline}
-      //   summary={article.summary}
-      //   showSummary={showSummaries}
-      //   image={article.image}
-      //   />
 
       articles.map((article, idx) => {
         articleJSX.push(
           <ArticleModal
             key={idx}
             article={ article }
+            timer={ this.state.timer }
           />
         );
       });
-      // code above is equal to this:
-      // for (let i = 0; i < articles.length; i++) {
-      //   articleJSX.push(
-      //     <Article key={i} headline={articles[i].headline}></Article>
-      //   );
-      // }
 
-      // <button onClick={this.toggleSummaries}>{showSummaries ? 'Hide' : 'Show'} Summaries</button>
+      let timer = this.state.timer > 0 ? this.state.timer : "";
+
       return (
         <div className="landing-container">
           <HelloWorld />
           <div className ="article-container">
+            <p className="count-down">{ timer }</p>
             {articleJSX}
           </div>
         </div>

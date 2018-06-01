@@ -13,6 +13,10 @@ $background-color: #eee;
   margin-right: auto;
 }
 
+* {
+  outline: none;
+}
+
 body {
   background-color: $background-color;
 }
@@ -24,6 +28,17 @@ body {
   .article-container {
     display: flex;
     flex-wrap: wrap;
+
+    .count-down {
+      height: 20px;
+      color: red;
+      text-align: right;
+      font-size: 25px;
+      padding: 0;
+      margin: 0;
+      margin-right: 150px;
+      width: 100%;
+    }
   }
 }
 
@@ -53,6 +68,13 @@ body {
   }
 }
 
+.article-modal {
+  background-color: white;
+  width: 70%;
+  padding: 50px;
+  margin: 50px auto;
+}
+
 .article-description-modal {
   margin: 0 auto;
   width: 50%;
@@ -63,21 +85,86 @@ body {
 
   p {
     width: 85%;
-    margin: 0 auto;
+    margin: 15px auto;
   }
 
-  span:nth-child(2) {
-    margin-left: 20px;
+  .author-publish-info {
+    font-size: 14px;
+    text-align: right;
+
+    span:first-child {
+      font-weight: bold;
+    }
+
+    span:nth-child(2) {
+      margin-left: 5px;
+      margin-right: 30px;
+    }
+
+    p {
+      font-size: 16px;
+      text-align: center;
+
+      a {
+        margin-left: 5px;
+      }
+    }
   }
+
 
   img {
     @include image-dimention(75%, 90%);
   }
-
 }
 
 .header-image {
   @include image-dimention(50px, 50%);
-  padding-bottom: 5px;
+  padding-bottom: 12px;
   border-bottom: 1px solid grey;
+  box-shadow: 0 1px grey;
+}
+
+.subscribe-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+
+  .subscribe-container {
+    background-color: #ADD8E6;
+    width: 70%;
+    height: 70%;
+    padding: 50px;
+    margin: 50px auto;
+
+    .subscribe-info {
+      margin-top: 10%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 35px;
+      width: 50%;
+      text-align: center;
+      font-weight: bold;
+      line-height: 1.8;
+      text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+
+      a {
+        color: black;
+        text-shadow: none;
+        background-color: blue;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0px 10px 30px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

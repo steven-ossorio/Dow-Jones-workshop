@@ -9,11 +9,23 @@ class ArticleModal extends Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      secondModal: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.blockView = this.blockView.bind(this);
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.timer === 0) {
+      this.blockView();
+    }
+  }
+
+  blockView() {
+    this.setState({secondModal: true});
   }
 
   openModal() {
@@ -29,7 +41,6 @@ class ArticleModal extends Component {
       headline,
       image,
       byline,
-      // date_published,
       share_link,
       summary
     } = this.props.article;
@@ -40,30 +51,70 @@ class ArticleModal extends Component {
 
 
     if (this.state.modalIsOpen) {
+      let pleaseSubscribe = "";
+      if (this.state.secondModal && this.props.timer === 0) {
+        pleaseSubscribe = <div onClick={ this.closeModal } className="subscribe-modal">
+          <div className="subscribe-container">
+            <div className="subscribe-info">
+              <p>
+                Thank you for using Wall Street Journel. For more amazing
+                content please subscribe.
+              </p>
+              <a src="https://store.wsj.com/v2/shop/US/US/wsjusmemorial18?inttrackingCode=aaqro02c&icid=WSJ_ON_PHP_ACQ_NA&n2IKsaD9=n2IKsaD9&Pg9aWOPT=Pg9aWOPT&Cp5dKJWb=Cp5dKJWb&APCc9OU1=APCc9OU1">Subscribe</a>
+            </div>
+          </div>
+        </div>;
+      }
       return (
         <div>
-        <Modal
-        isOpen={this.state.modalIsOpen}
-        onAfterOpen={this.afterOpenModal}
-        onRequestClose={this.closeModal}
-        >
+          <Modal
+          className="article-modal"
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          >
 
-        <div className="article-description-modal">
-          <h3>{headline}</h3>
-          <img src={ image }></img>
-          <p>{ summary }</p>
-          <div className="author-publish-info">
-            <span>Published { byline }</span>
-            <span>on { date_published }.</span>
-            <span>
-              For more information, please visit
-              <a href={ share_link }>{ headline }</a>
-            </span>
+          { pleaseSubscribe }
+          <div className="article-description-modal">
+            <h3>{headline}</h3>
+            <img src={ image }></img>
+            <p>{ summary }</p>
+            <div className="author-publish-info">
+              <span>Published { byline }</span>
+              <span>on { date_published }.</span>
+              <p>
+                For more information, please visit
+                <a href={ share_link }>{ headline }</a>
+              </p>
+            </div>
           </div>
-        </div>
-        </Modal>
+          </Modal>
         </div>
       );
+    // } else if (this.state.modalIsOpen && this.props.timer === 0) {
+    //   return(
+    //     <div>
+    //     <Modal
+    //     className="article-modal"
+    //     isOpen={this.state.modalIsOpen}
+    //     onRequestClose={this.closeModal}
+    //     >
+    //
+    //     <div className="article-description-modal">
+    //       <h3>{headline}</h3>
+    //       <img src={ image }></img>
+    //       <p>{ summary }</p>
+    //       <div className="author-publish-info">
+    //         <span>Published { byline }</span>
+    //         <span>on { date_published }.</span>
+    //         <p>
+    //           For more information, please visit
+    //           <a href={ share_link }>{ headline }</a>
+    //         </p>
+    //       </div>
+    //     </div>
+    //     </Modal>
+    //     </div>
+    //   );
     } else {
       return <div onClick={ this.openModal } className="article-description">
         <h3>{headline}</h3>
