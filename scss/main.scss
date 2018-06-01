@@ -58,6 +58,7 @@ body {
 .article-description {
   width: 30%;
   margin: 10px;
+  cursor: pointer;
 
   h3 {
     @include text(16px);

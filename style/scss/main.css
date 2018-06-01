@@ -31,7 +31,8 @@ body {
 
 .article-description {
   width: 30%;
-  margin: 10px; }
+  margin: 10px;
+  cursor: pointer; }
   .article-description h3 {
     font-size: 16px;
     text-align: center; }
