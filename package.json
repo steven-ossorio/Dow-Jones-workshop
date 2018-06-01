@@ -5,14 +5,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --config webpack.config.server.js"
+    "start": "webpack --config webpack.config.server.js",
+    "scss": "node-sass --watch scss -o style/scss"
   },
   "dependencies": {
     "copy-webpack-plugin": "^4.5.1",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
+    "node-sass": "^4.9.0",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-modal": "^3.4.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

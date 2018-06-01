@@ -1,0 +1,83 @@
+$background-color: #eee;
+
+@mixin text($text-size) {
+  font-size: $text-size;
+  text-align: center;
+}
+
+@mixin image-dimention($image-height, $image-width) {
+  width: $image-width;
+  height: $image-height;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  background-color: $background-color;
+}
+
+.landing-container {
+  width: 80%;
+  margin: 0 auto;
+
+  .article-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.clicked {
+  text-decoration: none;
+}
+
+.unclicked {
+  text-decoration: underline;
+}
+
+.imagetest {
+  background: url('../../assets/cyberman.jpg');
+}
+
+
+.article-description {
+  width: 30%;
+  margin: 10px;
+
+  h3 {
+    @include text(16px);
+  }
+
+  img {
+    @include image-dimention(75%, 90%);
+  }
+}
+
+.article-description-modal {
+  margin: 0 auto;
+  width: 50%;
+
+  h3 {
+    @include text(25px);
+  }
+
+  p {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  span:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  img {
+    @include image-dimention(75%, 90%);
+  }
+
+}
+
+.header-image {
+  @include image-dimention(50px, 50%);
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+}

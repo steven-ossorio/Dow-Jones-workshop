@@ -1,49 +1,29 @@
-import React, { Component } from 'react';
-
-//import any other components here
-import HelloWorld from '../src/helloworld';
-
-//import CSS here, so webpack knows to include in bundle
-import style from '../client/style/main.css';
-
-//this is the component that generates the body of the page
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <HelloWorld />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/* STEP 2, MORE COMPLICATED CODE FOLLOWS:
+// STEP 2, MORE COMPLICATED CODE FOLLOWS:
 
 import React, { Component } from 'react';
 
 //import any other components here
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
+import ArticleModal from '../src/article-modal';
 
 //import CSS here, so webpack knows to include in bundle
-import style from '../client/style/main.css';
+import style from '../style/scss/main.css';
 
 //this is the component that generates the body of the page
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleSummaries = this.toggleSummaries.bind(this);
 
     //default state
     //this keeps track of "live" data on the browser
     this.state = {
       articles: null,
       error: null,
-      loaded: false
+      loaded: false,
+      showSummaries: false
     };
   }
 
@@ -75,8 +55,14 @@ class App extends Component {
     console.log('toggle button clicked');
   }
 
+  toggleSummaries() {
+    this.setState( (prevProps, props) => ({
+      showSummaries: !prevProps.showSummaries
+    }));
+  }
+
   render() {
-    const {loaded, error, articles} = this.state;
+    const {loaded, error, articles, showSummaries} = this.state;
     //  code above is equal to this:
     //  const loaded = this.state.loaded;
     //  const error = this.state.error;
@@ -84,19 +70,26 @@ class App extends Component {
 
     if (error) {
       //render this when there's error getting data
-      return <div>Sorry! Something went wrong</div>
+      return <div>Sorry! Something went wrong</div>;
     } else if (!loaded) {
       //render while content is loading
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     } else {
       //render articles
       let articleJSX = [];
+      // <Article
+      //   key={idx}
+      //   headline={article.headline}
+      //   summary={article.summary}
+      //   showSummary={showSummaries}
+      //   image={article.image}
+      //   />
 
       articles.map((article, idx) => {
         articleJSX.push(
-          <Article
+          <ArticleModal
             key={idx}
-            headline={article.headline}
+            article={ article }
           />
         );
       });
@@ -107,12 +100,13 @@ class App extends Component {
       //   );
       // }
 
+      // <button onClick={this.toggleSummaries}>{showSummaries ? 'Hide' : 'Show'} Summaries</button>
       return (
-        <div>
-          <button onClick={this.toggle}>Toggle Something</button>
+        <div className="landing-container">
           <HelloWorld />
-          <HelloWorld message="Hi!" />
-          {articleJSX}
+          <div className ="article-container">
+            {articleJSX}
+          </div>
         </div>
       );
 
@@ -121,4 +115,3 @@ class App extends Component {
 }
 
 export default App;
-*/

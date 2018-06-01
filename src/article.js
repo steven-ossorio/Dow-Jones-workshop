@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 //Basic Article Component
 class Article extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
 
     //initial state
-    this.state = {};
+    this.state = {
+      toggled: false
+    };
   }
 
   //Component Lifecycle
@@ -52,10 +54,28 @@ class Article extends Component {
   //use className to add CSS classes
   //remember that this is not HTML!!
   //https://reactjs.org/docs/introducing-jsx.html
+
+
+
   render() {
-    return <div>Hello World</div>;
+    const { toggled } = this.state;
+
+    const {
+      headline,
+      summary,
+      showSummary,
+      image
+    } = this.props;
+
+    const summariesDisplay = showSummary ? <div className="article-summary">{summary}</div> : '';
+
+    return <div onClick={ this.handleToggle } className="article-description">
+      <h3>{headline}</h3>
+      {summariesDisplay}
+      <img src={ image }></img>
+    </div>;
   }
-};
+}
 
 //set default props here, if any
 Article.defaultProps = {};
