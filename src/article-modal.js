@@ -53,14 +53,15 @@ class ArticleModal extends Component {
     if (this.state.modalIsOpen) {
       let pleaseSubscribe = "";
       if (this.state.secondModal && this.props.timer === 0) {
-        pleaseSubscribe = <div onClick={ this.closeModal } className="subscribe-modal">
+        pleaseSubscribe = <div className="subscribe-modal">
           <div className="subscribe-container">
+            <div onClick={ this.closeModal } className="close-modal">X</div>
             <div className="subscribe-info">
               <p>
                 Thank you for using Wall Street Journel. For more amazing
                 content please subscribe.
               </p>
-              <a src="https://store.wsj.com/v2/shop/US/US/wsjusmemorial18?inttrackingCode=aaqro02c&icid=WSJ_ON_PHP_ACQ_NA&n2IKsaD9=n2IKsaD9&Pg9aWOPT=Pg9aWOPT&Cp5dKJWb=Cp5dKJWb&APCc9OU1=APCc9OU1">Subscribe</a>
+              <a href="https://store.wsj.com/v2/shop/US/US/wsjusmemorial18?inttrackingCode=aaqro02c&icid=WSJ_ON_PHP_ACQ_NA&n2IKsaD9=n2IKsaD9&Pg9aWOPT=Pg9aWOPT&Cp5dKJWb=Cp5dKJWb&APCc9OU1=APCc9OU1">Subscribe</a>
             </div>
           </div>
         </div>;

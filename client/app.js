@@ -25,7 +25,7 @@ class App extends Component {
       error: null,
       loaded: false,
       showSummaries: false,
-      timer: 10,
+      timer: 60,
     };
   }
 
